@@ -691,13 +691,16 @@
             </div>
 
             <div class="final-text-sequence" id="final-sequence">
-                <p id="seq-1">No matter where life takes us...</p>
-                <p id="seq-2">You'll always have a brother who has your back. ❤️</p>
+                <p id="seq-1">We might grow older, and our lives might get busier...</p>
+                <p id="seq-2">But no matter how much time passes or how much changes...</p>
+                <p id="seq-3">You will always be my favorite person to annoy, and my most precious sister.</p>
+                <p id="seq-4">I promise to always protect you, stand by you, and cheer for you.</p>
+                <p id="seq-5">Because a bond like ours is forever. ❤️</p>
             </div>
 
             <div class="grand-finale" id="grand-finale">
                 <h1>Happy Raksha Bandhan, Sis! 🎀❤️</h1>
-                <p style="font-size: 1.5rem; color: var(--accent-gold-light);">I love you!</p>
+                <p style="font-size: 1.5rem; color: var(--accent-gold-light);">Thank you for being the best part of my life. I love you!</p>
                 <button class="btn" onclick="resetApp()" style="margin-top: 3rem; font-size: 1rem; padding: 0.8rem 2rem;">Replay Experience 🔄</button>
             </div>
         </section>
@@ -861,40 +864,43 @@ Your Brother`;
         }
 
         /* --- FINAL CINEMATIC SURPRISE --- */
-        function triggerCinematicReveal() {
+        async function triggerCinematicReveal() {
             document.body.classList.add('cinematic-active');
             document.getElementById('final-initial').style.display = 'none';
             
-            const seq1 = document.getElementById('seq-1');
-            const seq2 = document.getElementById('seq-2');
             const finale = document.getElementById('grand-finale');
 
             // Cinematic Particle Flow
             startCinematicParticles();
 
-            // Sequence 1
-            setTimeout(() => {
-                seq1.classList.add('visible');
-            }, 1000);
+            // A helper to pause execution
+            const delay = (ms) => new Promise(res => setTimeout(res, ms));
 
-            // Sequence 2
-            setTimeout(() => {
-                seq1.classList.remove('visible');
-                setTimeout(() => {
-                    seq2.classList.add('visible');
-                }, 1500);
-            }, 4500);
+            // Helper to play a single text sequence smoothly
+            const playSeq = async (id) => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.classList.add('visible');
+                    await delay(4000); // 1.5s fade in + 2.5s reading time
+                    el.classList.remove('visible');
+                    await delay(1500); // Wait for the 1.5s fade out to complete
+                }
+            };
+
+            await delay(1000); // Initial dramatic pause after clicking
+
+            // Play the emotional sequence
+            await playSeq('seq-1');
+            await playSeq('seq-2');
+            await playSeq('seq-3');
+            await playSeq('seq-4');
+            await playSeq('seq-5');
 
             // Grand Finale
-            setTimeout(() => {
-                seq2.classList.remove('visible');
-                setTimeout(() => {
-                    finale.classList.add('show');
-                    createParticles(50, '💖');
-                    createParticles(50, '✨');
-                    createParticles(30, '🌸');
-                }, 1500);
-            }, 8500);
+            finale.classList.add('show');
+            createParticles(50, '💖');
+            createParticles(50, '✨');
+            createParticles(30, '🌸');
         }
 
         function resetApp() {
