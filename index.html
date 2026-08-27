@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy Raksha Bandhan 🎀</title>
+    
+    <!-- Google Fonts for Premium Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Great+Vibes&display=swap" rel="stylesheet">
+
+    <style>
+        /* =========================================
+           1. CSS VARIABLES & THEME SETUP
+           ========================================= */
+        :root {
+            /* Premium Color Palette */
+            --bg-dark: #1a0b2e;
+            --bg-purple: #3a1c71;
+            --bg-pink: #d76d77;
+            --bg-orange: #ffaf7b;
+            
+            --accent-gold: #f6d365;
+            --accent-gold-light: #ffeb99;
+            --accent-pink: #ff758c;
+            --accent-red: #ff4b4b;
+            
+            --text-main: #ffffff;
+            --text-cream: #fff0f5;
+            --text-dark: #2d1b4e;
+            
+            /* Glassmorphism */
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            
+            /* Typography */
+            --font-sans: 'Outfit', sans-serif;
+            --font-serif: 'Playfair Display', serif;
+            --font-hand: 'Great Vibes', cursive;
+            
+            /* Sizing */
+            --nav-height: 80px;
+        }
+
+        /* =========================================
+           2. RESET & BASE STYLES
+           ========================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* Prevents native scrolling, managed by custom SPA logic */
+            background-color: var(--bg-dark);
+            font-family: var(--font-sans);
+            color: var(--text-main);
+            position: relative;
+        }
+
+        /* Dynamic Animated Background */
+        .bg-gradient {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-purple) 40%, var(--bg-pink) 80%, var(--bg-orange) 100%);
+            background-size: 300% 300%;
+            animation: gradientShift 20s ease infinite;
+            z-index: -2;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Particle Container */
+        #particles {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        /* Typography Utilities */
+        h1, h2, h3 { font-family: var(--font-serif); font-weight: 700; line-height: 1.2; }
+        p { line-height: 1.6; font-weight: 300; }
+        
+        /* Premium Gradient Text */
+        .text-gradient {
+            background: linear-gradient(to right, var(--accent-gold-light), var(--accent-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        /* =========================================
+           3. NAVIGATION
+           ========================================= */
+        nav {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: var(--nav-height);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            z-index: 100;
+            background: rgba(26, 11, 46, 0.3);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--glass-border);
+            transition: transform 0.4s ease;
+        }
+
+        .nav-logo {
+            font-family: var(--font-serif);
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            font-weight: 700;
+            color: var(--accent-gold);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-cream);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent-gold);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; width: 0; height: 2px;
+            background: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Mobile Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 101;
+        }
+        
+        .hamburger span {
+            width: 30px; height: 2px;
+            background: var(--text-main);
+            transition: 0.3s;
+        }
+
+        /* =========================================
+           4. GLOBAL LAYOUT & PAGES (SPA)
+           ========================================= */
+        main {
+            width: 100%; height: 100%;
+            position: relative;
+        }
+
+        .page {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            padding: calc(var(--nav-height) + 2rem) 5% 2rem 5%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.95) translateY(20px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto; /* Allow scrolling within the page if content is tall */
+        }
+
+        .page.active {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1) translateY(0);
+        }
+
+        /* Premium Buttons */
+        .btn {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px 0 rgba(0,0,0,0.2);
+            color: var(--accent-gold-light);
+            font-family: var(--font-sans);
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            font-weight: 600;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 2rem;
+            text-decoration: none;
+        }
+
+        .btn::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(246, 211, 101, 0.3);
+            border-color: var(--accent-gold);
+            color: var(--text-main);
+        }
+
+        .btn:hover::before { left: 100%; }
+        .btn:active { transform: translateY(2px); }
+
+        /* Glass Card Base */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: clamp(2rem, 5vw, 4rem);
+            box-shadow: var(--glass-shadow);
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* =========================================
+           5. SPECIFIC PAGE STYLES
+           ========================================= */
+        
+        /* --- Page 1: Home --- */
+        #home .hero-content { text-align: center; max-width: 900px; z-index: 2; }
+        #home h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            margin-bottom: 1rem;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        #home p {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--text-cream);
+            margin-bottom: 2rem;
+        }
+        .hero-rakhi-icon {
+            font-size: clamp(4rem, 10vw, 6rem);
+            margin-bottom: 1rem;
+            animation: float 4s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(246,211,101,0.5));
+        }
+
+        /* --- Page 2: Letter --- */
+        .letter-container {
+            text-align: left;
+            position: relative;
+        }
+        .letter-greeting {
+            font-family: var(--font-hand);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: var(--accent-gold);
+            margin-bottom: 1.5rem;
+        }
+        .letter-body {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            line-height: 1.8;
+            color: var(--text-cream);
+            min-height: 250px; /* Space for typing */
+        }
+        .typing-cursor {
+            display: inline-block;
+            width: 2px; height: 1em;
+            background-color: var(--accent-gold);
+            vertical-align: text-bottom;
+            animation: blink 1s step-end infinite;
+        }
+        .letter-footer { text-align: center; margin-top: 2rem; opacity: 0; transition: opacity 1s; }
+
+        /* --- Page 3: Rakhi --- */
+        .rakhi-showcase {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        /* Pure CSS Premium Rakhi Art */
+        .css-rakhi {
+            position: relative;
+            width: 250px; height: 100px;
+            display: flex; justify-content: center; align-items: center;
+            transition: all 1s ease;
+        }
+        .css-rakhi .thread {
+            position: absolute;
+            width: 120px; height: 4px;
+            background: linear-gradient(90deg, #8a2387, #e94057, #f27121);
+            border-radius: 2px;
+            z-index: 1;
+            box-shadow: 0 0 10px rgba(233, 64, 87, 0.5);
+        }
+        .css-rakhi .thread.left { right: 50%; transform-origin: right center; transform: rotate(-5deg); }
+        .css-rakhi .thread.right { left: 50%; transform-origin: left center; transform: rotate(5deg); }
+        
+        .css-rakhi .centerpiece {
+            position: relative; z-index: 2;
+            width: 80px; height: 80px;
+            background: radial-gradient(circle, var(--accent-gold-light), var(--accent-gold));
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            box-shadow: 0 0 30px rgba(246, 211, 101, 0.6), inset 0 0 10px rgba(0,0,0,0.2);
+            border: 3px solid #fff;
+            animation: pulse 3s infinite;
+        }
+        .css-rakhi .centerpiece::before { /* Inner pattern */
+            content: '🌸'; font-size: 40px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+
+        /* Rakhi Tied Animation State */
+        .css-rakhi.tied .thread.left { transform: rotate(0deg) scaleX(1.5) translateX(-20px); }
+        .css-rakhi.tied .thread.right { transform: rotate(0deg) scaleX(1.5) translateX(20px); }
+        .css-rakhi.tied .centerpiece {
+            box-shadow: 0 0 60px rgba(246, 211, 101, 1), 0 0 100px rgba(255, 117, 140, 0.8);
+            transform: scale(1.1);
+        }
+
+        .rakhi-message {
+            font-family: var(--font-serif);
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: var(--accent-gold-light);
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s ease 0.5s;
+            height: 0; overflow: hidden;
+        }
+        .rakhi-message.show { opacity: 1; transform: translateY(0); height: auto; margin-top: 1rem; }
+
+        /* --- Page 4: Special --- */
+        .special-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 1000px;
+            margin-top: 2rem;
+        }
+        .feature-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        .page.active .feature-card {
+            opacity: 1; transform: translateY(0);
+        }
+        /* Staggered entrance */
+        .page.active .feature-card:nth-child(1) { transition-delay: 0.1s; }
+        .page.active .feature-card:nth-child(2) { transition-delay: 0.3s; }
+        .page.active .feature-card:nth-child(3) { transition-delay: 0.5s; }
+        .page.active .feature-card:nth-child(4) { transition-delay: 0.7s; }
+
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: rgba(255, 255, 255, 0.12);
+            border-color: var(--accent-gold);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3), 0 0 20px rgba(246, 211, 101, 0.2);
+        }
+        .feature-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .feature-title { font-family: var(--font-serif); font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--accent-gold); }
+        .feature-text { font-size: 0.95rem; color: var(--text-cream); }
+
+        /* --- Page 5: Gift --- */
+        .gift-container { perspective: 1000px; margin: 3rem 0; cursor: pointer; }
+        .css-gift {
+            position: relative; width: 160px; height: 160px;
+            transform-style: preserve-3d; transition: transform 0.5s;
+        }
+        .css-gift .box {
+            position: absolute; bottom: 0; width: 100%; height: 120px;
+            background: linear-gradient(135deg, #e94057, #f27121);
+            border-radius: 8px;
+            box-shadow: inset -10px -10px 20px rgba(0,0,0,0.2), 0 20px 40px rgba(0,0,0,0.4);
+            display: flex; justify-content: center;
+        }
+        .css-gift .box::after { /* Vertical Ribbon */
+            content: ''; position: absolute; width: 30px; height: 100%;
+            background: var(--accent-gold);
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+        }
+        .css-gift .lid {
+            position: absolute; top: 10px; left: -10px; width: 180px; height: 40px;
+            background: linear-gradient(135deg, #f27121, #e94057);
+            border-radius: 6px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            display: flex; justify-content: center;
+            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+            z-index: 2; transform-origin: bottom center;
+        }
+        .css-gift .lid::after { /* Lid Ribbon */
+            content: ''; position: absolute; width: 30px; height: 100%;
+            background: var(--accent-gold);
+        }
+        .css-gift .bow {
+            position: absolute; top: -30px; left: 50%; transform: translateX(-50%);
+            width: 80px; height: 40px; display: flex; justify-content: center; z-index: 3;
+            transition: all 0.8s;
+        }
+        .css-gift .bow::before, .css-gift .bow::after {
+            content: ''; width: 40px; height: 30px;
+            border: 10px solid var(--accent-gold); border-radius: 50%;
+            position: absolute;
+        }
+        .css-gift .bow::before { left: 0; transform: rotate(-20deg); }
+        .css-gift .bow::after { right: 0; transform: rotate(20deg); }
+
+        /* Gift Open State */
+        .css-gift.open .lid {
+            transform: translateY(-80px) rotateX(45deg) rotateZ(10deg);
+            opacity: 0;
+        }
+        .css-gift.open .bow { transform: translateX(-50%) translateY(-80px); opacity: 0; }
+        .css-gift.open .box {
+            box-shadow: 0 0 60px rgba(246, 211, 101, 0.8), 0 0 100px rgba(255, 255, 255, 0.5);
+        }
+        
+        .gift-reveal-msg {
+            font-family: var(--font-serif); font-size: clamp(1.2rem, 3vw, 2rem);
+            color: var(--text-main); margin-top: 1rem;
+            opacity: 0; transform: scale(0.9); transition: all 1s ease 0.5s;
+            max-width: 600px; text-align: center; height: 0; overflow: hidden;
+        }
+        .gift-reveal-msg.show { opacity: 1; transform: scale(1); height: auto; margin-top: 2rem; }
+
+        /* --- Page 6: Final Surprise --- */
+        #final { justify-content: center; z-index: 10; }
+        .cinematic-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #05020a; z-index: 5;
+            opacity: 0; pointer-events: none; transition: opacity 2s ease;
+        }
+        .cinematic-active .cinematic-overlay { opacity: 1; pointer-events: all; }
+        .cinematic-active nav { transform: translateY(-100%); } /* Hide nav in cinematic mode */
+        
+        .final-content { position: relative; z-index: 10; text-align: center; }
+        .final-text-sequence p {
+            font-family: var(--font-serif);
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            color: var(--text-main);
+            opacity: 0; position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%); width: 100%;
+            transition: opacity 1.5s ease;
+        }
+        .final-text-sequence p.visible { opacity: 1; }
+        
+        .grand-finale {
+            opacity: 0; transform: scale(0.8); transition: all 2s ease;
+            display: none; flex-direction: column; align-items: center; gap: 1.5rem;
+        }
+        .grand-finale.show { opacity: 1; transform: scale(1); display: flex; }
+        .grand-finale h1 {
+            font-family: var(--font-hand); font-size: clamp(4rem, 10vw, 8rem);
+            background: linear-gradient(to right, #ff758c, #ff7eb3, #f6d365);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 40px rgba(255, 117, 140, 0.4); margin: 0; line-height: 1.1;
+        }
+
+        /* =========================================
+           6. UTILITIES & ANIMATIONS
+           ========================================= */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* Floating Audio Button */
+        #music-toggle {
+            position: fixed; bottom: 2rem; right: 2rem;
+            width: 50px; height: 50px; border-radius: 50%;
+            background: var(--glass-bg); backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border); color: var(--accent-gold);
+            font-size: 1.5rem; display: flex; justify-content: center; align-items: center;
+            cursor: pointer; z-index: 99; box-shadow: var(--glass-shadow);
+            transition: all 0.3s;
+        }
+        #music-toggle:hover { background: rgba(255,255,255,0.2); transform: scale(1.1); }
+        
+        footer {
+            position: fixed; bottom: 1rem; width: 100%; text-align: center;
+            font-size: 0.8rem; color: rgba(255,255,255,0.5); z-index: 10;
+            pointer-events: none;
+        }
+        .cinematic-active footer { opacity: 0; }
+
+        /* =========================================
+           7. RESPONSIVE DESIGN (Media Queries)
+           ========================================= */
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            .nav-links {
+                position: fixed; top: 0; right: -100%; width: 70%; height: 100vh;
+                background: rgba(26, 11, 46, 0.95); backdrop-filter: blur(20px);
+                flex-direction: column; justify-content: center; align-items: center;
+                transition: right 0.4s ease; border-left: 1px solid var(--glass-border);
+            }
+            .nav-links.nav-active { right: 0; }
+            .hamburger.toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+            .hamburger.toggle span:nth-child(2) { opacity: 0; }
+            .hamburger.toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+            
+            .special-grid { grid-template-columns: 1fr; }
+            .css-rakhi { transform: scale(0.8); }
+            .btn { padding: 0.8rem 2rem; width: 100%; justify-content: center; }
+            #music-toggle { bottom: 1rem; right: 1rem; width: 40px; height: 40px; font-size: 1.2rem; }
+            .glass-card { padding: 1.5rem; border-radius: 16px; }
+        }
+
+        @media (max-height: 600px) and (orientation: landscape) {
+            .page { padding-top: calc(var(--nav-height) + 1rem); }
+            .hero-rakhi-icon { font-size: 3rem; margin-bottom: 0.5rem; }
+            h1 { font-size: 2rem !important; }
+            .glass-card { padding: 1rem; }
+            .special-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+            .feature-card { padding: 1rem; }
+            .feature-icon { font-size: 2rem; margin-bottom: 0.5rem;}
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Dynamic Background -->
+    <div class="bg-gradient"></div>
+    <div id="particles"></div>
+    <div class="cinematic-overlay" id="cinematic-overlay"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="nav-logo" onclick="navigateTo('home')">Forever Bond ✨</a>
+        <ul class="nav-links">
+            <li><a onclick="navigateTo('home')" class="active">🏠 Home</a></li>
+            <li><a onclick="navigateTo('letter')">💌 Letter</a></li>
+            <li><a onclick="navigateTo('rakhi')">🎀 Rakhi</a></li>
+            <li><a onclick="navigateTo('special')">❤️ Sister</a></li>
+            <li><a onclick="navigateTo('gift')">🎁 Gift</a></li>
+            <li><a onclick="navigateTo('final')">✨ Surprise</a></li>
+        </ul>
+        <div class="hamburger">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <!-- Main Content SPA -->
+    <main>
+        
+        <!-- PAGE 1: HOME -->
+        <section id="home" class="page active">
+            <div class="hero-content">
+                <div class="hero-rakhi-icon">🪔</div>
+                <h1>Happy Raksha Bandhan, <br> <span class="text-gradient">My Dear Sister!</span> ❤️</h1>
+                <p>I made something special just for you...</p>
+                <button class="btn" onclick="navigateTo('letter')">Start Your Surprise ✨</button>
+            </div>
+        </section>
+
+        <!-- PAGE 2: LETTER -->
+        <section id="letter" class="page">
+            <div class="glass-card letter-container">
+                <h2 class="letter-greeting">Dear Sister,</h2>
+                <div class="letter-body">
+                    <span id="typed-text"></span><span class="typing-cursor"></span>
+                </div>
+                <div class="letter-footer" id="letter-btn">
+                    <button class="btn" onclick="navigateTo('rakhi')">Continue ❤️</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 3: RAKHI -->
+        <section id="rakhi" class="page">
+            <h2 style="font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 3rem; text-align: center;">A Bond That Never Breaks 🎀</h2>
+            <div class="rakhi-showcase">
+                <div class="css-rakhi" id="interactive-rakhi">
+                    <div class="thread left"></div>
+                    <div class="centerpiece"></div>
+                    <div class="thread right"></div>
+                </div>
+                
+                <button class="btn" id="tie-rakhi-btn" onclick="tieRakhi()">Tie The Rakhi 🎀</button>
+                
+                <div class="rakhi-message" id="rakhi-msg">
+                    <p>A bond of love, laughter, protection, and forever. ❤️</p>
+                    <button class="btn" onclick="navigateTo('special')" style="font-size: 1rem; padding: 0.8rem 2rem; margin-top:1rem;">Next Surprise →</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 4: SPECIAL -->
+        <section id="special" class="page">
+            <h2 style="font-size: clamp(2rem, 4vw, 3rem); text-align: center;">Why You're The Best Sister ❤️</h2>
+            <div class="special-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">💖</div>
+                    <h3 class="feature-title">You Make Life Happier</h3>
+                    <p class="feature-text">Everything is a little more fun with you around.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">😂</div>
+                    <h3 class="feature-title">Professional Annoyer</h3>
+                    <p class="feature-text">You somehow know exactly how to annoy me (but I secretly love it).</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌸</div>
+                    <h3 class="feature-title">You Make Moments Special</h3>
+                    <p class="feature-text">Even ordinary days become memorable with you.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤝</div>
+                    <h3 class="feature-title">Always There</h3>
+                    <p class="feature-text">Knowing you're there makes everything feel easier.</p>
+                </div>
+            </div>
+            <button class="btn" onclick="navigateTo('gift')">There's More... 👀</button>
+        </section>
+
+        <!-- PAGE 5: GIFT -->
+        <section id="gift" class="page">
+            <h2 style="font-size: clamp(2rem, 4vw, 3rem); text-align: center;">I Have One Little Gift For You 🎁</h2>
+            <div class="gift-container" onclick="openGift()">
+                <div class="css-gift" id="interactive-gift">
+                    <div class="box"></div>
+                    <div class="lid">
+                        <div class="bow"></div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn" id="open-gift-btn" onclick="openGift()">Tap to Open 🎀</button>
+            
+            <div class="gift-reveal-msg" id="gift-msg">
+                <p>This little gift may be simple, but it carries a lot of love. I hope it makes you smile. ❤️</p>
+                <button class="btn" onclick="navigateTo('final')">One Last Thing... ✨</button>
+            </div>
+        </section>
+
+        <!-- PAGE 6: FINAL SURPRISE -->
+        <section id="final" class="page">
+            <div class="final-content" id="final-initial">
+                <h2 style="font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 2rem;">Wait... There's One More Surprise 👀</h2>
+                <button class="btn" style="box-shadow: 0 0 30px rgba(246,211,101,0.5);" onclick="triggerCinematicReveal()">Reveal It ✨</button>
+            </div>
+
+            <div class="final-text-sequence" id="final-sequence">
+                <p id="seq-1">No matter where life takes us...</p>
+                <p id="seq-2">You'll always have a brother who has your back. ❤️</p>
+            </div>
+
+            <div class="grand-finale" id="grand-finale">
+                <h1>Happy Raksha Bandhan, Sis! 🎀❤️</h1>
+                <p style="font-size: 1.5rem; color: var(--accent-gold-light);">I love you!</p>
+                <button class="btn" onclick="resetApp()" style="margin-top: 3rem; font-size: 1rem; padding: 0.8rem 2rem;">Replay Experience 🔄</button>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>Made with ❤️ especially for my amazing sister.</footer>
+
+    <!-- Audio Player (Hidden) -->
+    <!-- DEVELOPER NOTE: Replace the src with your own elegant MP3 file url. 
+         A gentle piano or acoustic track is recommended. -->
+    <audio id="bg-music" loop>
+        <source src="https://assets.mixkit.co/music/preview/mixkit-beautiful-dream-493.mp3" type="audio/mpeg">
+    </audio>
+    <div id="music-toggle" onclick="toggleMusic()">🎵</div>
+
+    <!-- =========================================
+         8. JAVASCRIPT LOGIC
+         ========================================= -->
+    <script>
+        /* --- CONFIGURATION --- */
+        // Edit this letter to customize your message.
+        const letterContent = `On this Raksha Bandhan, I just want you to know how incredibly special you are to me.
+        
+We may fight, tease each other, and annoy each other sometimes, but no matter what happens, you'll always have a very special place in my heart. 
+
+Thank you for all the laughter, silly arguments, support, and countless little moments we've shared. You're not just my sister. You're someone I'll always care about, support, and protect.
+
+This Rakhi is a reminder that no matter where life takes us, our bond will always remain special.
+
+Happy Raksha Bandhan! ❤️
+
+With lots of love,
+Your Brother`;
+
+        /* --- STATE VARIABLES --- */
+        let currentPage = 'home';
+        let typeWriterTimeout;
+        let isGiftOpened = false;
+        let isRakhiTied = false;
+        let isMusicPlaying = false;
+
+        /* --- NAVIGATION LOGIC --- */
+        const pages = document.querySelectorAll('.page');
+        const navLinks = document.querySelectorAll('.nav-links a');
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-links');
+
+        // Mobile Menu Toggle
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('nav-active');
+            hamburger.classList.toggle('toggle');
+        });
+
+        function navigateTo(pageId) {
+            // Close mobile menu if open
+            if(navMenu.classList.contains('nav-active')) {
+                navMenu.classList.remove('nav-active');
+                hamburger.classList.remove('toggle');
+            }
+
+            // Hide all pages
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // Update Nav Links
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if(link.getAttribute('onclick').includes(pageId)) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Show selected page
+            const targetPage = document.getElementById(pageId);
+            targetPage.classList.add('active');
+            currentPage = pageId;
+            
+            // Scroll to top
+            targetPage.scrollTop = 0;
+
+            // Trigger specific page animations
+            handlePageTriggers(pageId);
+        }
+
+        function handlePageTriggers(pageId) {
+            // Letter Typing Effect Trigger
+            if (pageId === 'letter') {
+                const textContainer = document.getElementById('typed-text');
+                const btn = document.getElementById('letter-btn');
+                textContainer.innerHTML = '';
+                btn.style.opacity = '0';
+                clearTimeout(typeWriterTimeout);
+                
+                let i = 0;
+                // Add minor delay for transition to finish
+                setTimeout(() => {
+                    typeWriter(letterContent, textContainer, btn, 0);
+                }, 500);
+            }
+        }
+
+        /* --- TYPING EFFECT --- */
+        function typeWriter(text, element, btnElement, index) {
+            if (index < text.length) {
+                // Handle newlines
+                if(text.charAt(index) === '\n') {
+                    element.innerHTML += '<br>';
+                } else {
+                    element.innerHTML += text.charAt(index);
+                }
+                index++;
+                typeWriterTimeout = setTimeout(() => typeWriter(text, element, btnElement, index), 30); // Typing speed
+            } else {
+                // Done typing
+                btnElement.style.opacity = '1';
+                createParticles(20, '🌸'); // Mini celebration
+            }
+        }
+
+        /* --- INTERACTIVE RAKHI --- */
+        function tieRakhi() {
+            if(isRakhiTied) return;
+            const rakhi = document.getElementById('interactive-rakhi');
+            const msg = document.getElementById('rakhi-msg');
+            const btn = document.getElementById('tie-rakhi-btn');
+            
+            btn.style.display = 'none';
+            rakhi.classList.add('tied');
+            
+            // Confetti effect
+            createParticles(30, '✨');
+            createParticles(20, '💖');
+            
+            setTimeout(() => {
+                msg.classList.add('show');
+                isRakhiTied = true;
+            }, 800);
+        }
+
+        /* --- INTERACTIVE GIFT --- */
+        function openGift() {
+            if(isGiftOpened) return;
+            const gift = document.getElementById('interactive-gift');
+            const msg = document.getElementById('gift-msg');
+            const btn = document.getElementById('open-gift-btn');
+            
+            btn.style.display = 'none';
+            gift.classList.add('open');
+            
+            // Big burst of particles
+            createParticles(40, '🎉');
+            createParticles(30, '✨');
+            createParticles(20, '💖');
+            
+            setTimeout(() => {
+                msg.classList.add('show');
+                isGiftOpened = true;
+            }, 1000);
+        }
+
+        /* --- FINAL CINEMATIC SURPRISE --- */
+        function triggerCinematicReveal() {
+            document.body.classList.add('cinematic-active');
+            document.getElementById('final-initial').style.display = 'none';
+            
+            const seq1 = document.getElementById('seq-1');
+            const seq2 = document.getElementById('seq-2');
+            const finale = document.getElementById('grand-finale');
+
+            // Cinematic Particle Flow
+            startCinematicParticles();
+
+            // Sequence 1
+            setTimeout(() => {
+                seq1.classList.add('visible');
+            }, 1000);
+
+            // Sequence 2
+            setTimeout(() => {
+                seq1.classList.remove('visible');
+                setTimeout(() => {
+                    seq2.classList.add('visible');
+                }, 1500);
+            }, 4500);
+
+            // Grand Finale
+            setTimeout(() => {
+                seq2.classList.remove('visible');
+                setTimeout(() => {
+                    finale.classList.add('show');
+                    createParticles(50, '💖');
+                    createParticles(50, '✨');
+                    createParticles(30, '🌸');
+                }, 1500);
+            }, 8500);
+        }
+
+        function resetApp() {
+            // Reset to initial state for replayability
+            document.body.classList.remove('cinematic-active');
+            document.getElementById('final-initial').style.display = 'block';
+            document.getElementById('grand-finale').classList.remove('show');
+            navigateTo('home');
+        }
+
+        /* --- MUSIC SYSTEM --- */
+        const audio = document.getElementById('bg-music');
+        const musicBtn = document.getElementById('music-toggle');
+        
+        // Lower default volume
+        audio.volume = 0.4;
+
+        function toggleMusic() {
+            if (isMusicPlaying) {
+                audio.pause();
+                musicBtn.innerHTML = '🔇';
+                musicBtn.style.color = 'var(--text-main)';
+            } else {
+                audio.play().catch(e => console.log("Audio play failed:", e));
+                musicBtn.innerHTML = '🎵';
+                musicBtn.style.color = 'var(--accent-gold)';
+                // Optional pulse animation
+                musicBtn.style.animation = 'pulse 2s infinite';
+            }
+            isMusicPlaying = !isMusicPlaying;
+        }
+
+        /* --- PARTICLE SYSTEM --- */
+        const particleContainer = document.getElementById('particles');
+        const defaultEmojis = ['✨', '💖', '🌸', '🪔'];
+
+        function createParticles(amount, specificEmoji = null) {
+            for (let i = 0; i < amount; i++) {
+                const particle = document.createElement('div');
+                particle.style.position = 'absolute';
+                
+                // Random position bottom
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.top = (Math.random() * 20 + 80) + 'vh'; // start near bottom
+                
+                // Random content
+                particle.innerText = specificEmoji || defaultEmojis[Math.floor(Math.random() * defaultEmojis.length)];
+                
+                // Random styles
+                const size = Math.random() * 1.5 + 0.5;
+                particle.style.fontSize = size + 'rem';
+                particle.style.opacity = '0';
+                particle.style.transform = `rotate(${Math.random() * 360}deg)`;
+                
+                particleContainer.appendChild(particle);
+
+                // Animate via Web Animations API for better performance
+                const duration = Math.random() * 3000 + 2000;
+                const tx = (Math.random() - 0.5) * 200;
+                const ty = -(Math.random() * 500 + 300);
+                
+                const animation = particle.animate([
+                    { opacity: 0, transform: `translate(0, 0) rotate(0deg) scale(0.5)` },
+                    { opacity: 1, offset: 0.2 },
+                    { opacity: 0, transform: `translate(${tx}px, ${ty}px) rotate(${Math.random() * 720}deg) scale(1.5)` }
+                ], {
+                    duration: duration,
+                    easing: 'cubic-bezier(0.25, 1, 0.5, 1)'
+                });
+
+                animation.onfinish = () => particle.remove();
+            }
+        }
+
+        // Ambient background particles loop
+        setInterval(() => {
+            if(!document.body.classList.contains('cinematic-active')) {
+                // Very subtle background particles
+                createParticles(2);
+            }
+        }, 1500);
+
+        let cinematicInterval;
+        function startCinematicParticles() {
+            clearInterval(cinematicInterval);
+            cinematicInterval = setInterval(() => {
+                if(document.body.classList.contains('cinematic-active')) {
+                    createParticles(5, '✨');
+                } else {
+                    clearInterval(cinematicInterval);
+                }
+            }, 800);
+        }
+
+        /* Initialize */
+        window.onload = () => {
+            // Ensure first page is active
+            navigateTo('home');
+        };
+    </script>
+</body>
+</html>
