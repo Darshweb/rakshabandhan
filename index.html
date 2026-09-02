@@ -3,1001 +3,735 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Happy Raksha Bandhan 🎀</title>
+    <title>Happy Raksha Bandhan Anvi 🎀</title>
     
-    <!-- Google Fonts for Premium Typography -->
+    <!-- Preloading and fetching premium Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN for responsive styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        script: ['Great Vibes', 'cursive'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0f0518',
+                            purple: '#4a154b',
+                            pink: '#c73866',
+                            gold: '#ffd700',
+                            lightGold: '#ffeba0'
+                        }
+                    },
+                    animation: {
+                        'gradient-x': 'gradient-x 15s ease infinite',
+                        'float': 'float 4s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        'gradient-x': {
+                            '0%, 100%': { 'background-size': '200% 200%', 'background-position': 'left center' },
+                            '50%': { 'background-size': '200% 200%', 'background-position': 'right center' },
+                        },
+                        'float': {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 
     <style>
-        /* =========================================
-           1. CSS VARIABLES & THEME SETUP
-           ========================================= */
-        :root {
-            /* Premium Color Palette */
-            --bg-dark: #1a0b2e;
-            --bg-purple: #3a1c71;
-            --bg-pink: #d76d77;
-            --bg-orange: #ffaf7b;
-            
-            --accent-gold: #f6d365;
-            --accent-gold-light: #ffeb99;
-            --accent-pink: #ff758c;
-            --accent-red: #ff4b4b;
-            
-            --text-main: #ffffff;
-            --text-cream: #fff0f5;
-            --text-dark: #2d1b4e;
-            
-            /* Glassmorphism */
-            --glass-bg: rgba(255, 255, 255, 0.08);
-            --glass-border: rgba(255, 255, 255, 0.2);
-            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-            
-            /* Typography */
-            --font-sans: 'Outfit', sans-serif;
-            --font-serif: 'Playfair Display', serif;
-            --font-hand: 'Great Vibes', cursive;
-            
-            /* Sizing */
-            --nav-height: 80px;
-        }
-
-        /* =========================================
-           2. RESET & BASE STYLES
-           ========================================= */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        html, body {
-            width: 100%;
-            height: 100%;
-            overflow: hidden; /* Prevents native scrolling, managed by custom SPA logic */
-            background-color: var(--bg-dark);
-            font-family: var(--font-sans);
-            color: var(--text-main);
-            position: relative;
-        }
-
-        /* Dynamic Animated Background */
-        .bg-gradient {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-purple) 40%, var(--bg-pink) 80%, var(--bg-orange) 100%);
-            background-size: 300% 300%;
-            animation: gradientShift 20s ease infinite;
-            z-index: -2;
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Particle Container */
-        #particles {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        /* Typography Utilities */
-        h1, h2, h3 { font-family: var(--font-serif); font-weight: 700; line-height: 1.2; }
-        p { line-height: 1.6; font-weight: 300; }
+        /* Base Resets & Custom Scrollbar */
+        * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
+        body, html { width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden; background-color: #0f0518; color: #f8fafc; }
         
-        /* Premium Gradient Text */
-        .text-gradient {
-            background: linear-gradient(to right, var(--accent-gold-light), var(--accent-gold));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: inline-block;
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255, 215, 0, 0.3); border-radius: 10px; }
+
+        /* Animated Mesh Background - Fixed to back */
+        .bg-mesh {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -10;
+            background: linear-gradient(-45deg, #0f0518, #2a0a3a, #4a154b, #8a235c);
+            background-size: 400% 400%;
+            animation: gradient-x 15s ease infinite;
         }
 
-        /* =========================================
-           3. NAVIGATION
-           ========================================= */
-        nav {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: var(--nav-height);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 5%;
-            z-index: 100;
-            background: rgba(26, 11, 46, 0.3);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-bottom: 1px solid var(--glass-border);
-            transition: transform 0.4s ease;
+        /* Particles Container */
+        #particles-js { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -5; pointer-events: none; overflow: hidden; }
+
+        /* Glassmorphism Utilities */
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
         }
 
-        .nav-logo {
-            font-family: var(--font-serif);
-            font-size: clamp(1.2rem, 3vw, 1.5rem);
-            font-weight: 700;
-            color: var(--accent-gold);
-            text-decoration: none;
-            letter-spacing: 1px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-cream);
-            text-decoration: none;
-            font-size: 1rem;
-            font-weight: 500;
-            position: relative;
-            padding: 0.5rem 0;
-            transition: color 0.3s;
-            cursor: pointer;
-        }
-
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--accent-gold);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 0; width: 0; height: 2px;
-            background: var(--accent-gold);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after, .nav-links a.active::after {
-            width: 100%;
-        }
-
-        /* Mobile Hamburger */
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            z-index: 101;
-        }
-        
-        .hamburger span {
-            width: 30px; height: 2px;
-            background: var(--text-main);
-            transition: 0.3s;
-        }
-
-        /* =========================================
-           4. GLOBAL LAYOUT & PAGES (SPA)
-           ========================================= */
-        main {
-            width: 100%; height: 100%;
-            position: relative;
-        }
-
+        /* Core SPA Architecture - Ensures scrolling works per page and layout doesn't break */
         .page {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            padding: calc(var(--nav-height) + 2rem) 5% 2rem 5%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0; visibility: hidden; pointer-events: none;
             transform: scale(0.95) translateY(20px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            overflow-y: auto; /* Allow scrolling within the page if content is tall */
-        }
-
-        .page.active {
-            opacity: 1;
-            visibility: visible;
-            transform: scale(1) translateY(0);
-        }
-
-        /* Premium Buttons */
-        .btn {
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 8px 32px 0 rgba(0,0,0,0.2);
-            color: var(--accent-gold-light);
-            font-family: var(--font-sans);
-            font-size: clamp(1rem, 2vw, 1.2rem);
-            font-weight: 600;
-            padding: 1rem 2.5rem;
-            border-radius: 50px;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 2rem;
-            text-decoration: none;
-        }
-
-        .btn::before {
-            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(246, 211, 101, 0.3);
-            border-color: var(--accent-gold);
-            color: var(--text-main);
-        }
-
-        .btn:hover::before { left: 100%; }
-        .btn:active { transform: translateY(2px); }
-
-        /* Glass Card Base */
-        .glass-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: clamp(2rem, 5vw, 4rem);
-            box-shadow: var(--glass-shadow);
-            max-width: 800px;
-            width: 100%;
-            text-align: center;
-        }
-
-        /* =========================================
-           5. SPECIFIC PAGE STYLES
-           ========================================= */
-        
-        /* --- Page 1: Home --- */
-        #home .hero-content { text-align: center; max-width: 900px; z-index: 2; }
-        #home h1 {
-            font-size: clamp(2.5rem, 6vw, 5rem);
-            margin-bottom: 1rem;
-            text-shadow: 0 5px 15px rgba(0,0,0,0.5);
-        }
-        #home p {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            color: var(--text-cream);
-            margin-bottom: 2rem;
-        }
-        .hero-rakhi-icon {
-            font-size: clamp(4rem, 10vw, 6rem);
-            margin-bottom: 1rem;
-            animation: float 4s ease-in-out infinite;
-            filter: drop-shadow(0 0 20px rgba(246,211,101,0.5));
-        }
-
-        /* --- Page 2: Letter --- */
-        .letter-container {
-            text-align: left;
-            position: relative;
-        }
-        .letter-greeting {
-            font-family: var(--font-hand);
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            color: var(--accent-gold);
-            margin-bottom: 1.5rem;
-        }
-        .letter-body {
-            font-size: clamp(1rem, 2.5vw, 1.3rem);
-            line-height: 1.8;
-            color: var(--text-cream);
-            min-height: 250px; /* Space for typing */
-        }
-        .typing-cursor {
-            display: inline-block;
-            width: 2px; height: 1em;
-            background-color: var(--accent-gold);
-            vertical-align: text-bottom;
-            animation: blink 1s step-end infinite;
-        }
-        .letter-footer { text-align: center; margin-top: 2rem; opacity: 0; transition: opacity 1s; }
-
-        /* --- Page 3: Rakhi --- */
-        .rakhi-showcase {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2rem;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto; overflow-x: hidden;
+            padding-top: 6rem; padding-bottom: 5rem; /* Safe areas for nav and mobile bars */
+            z-index: 10;
+            display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
         }
         
-        /* Pure CSS Premium Rakhi Art */
-        .css-rakhi {
-            position: relative;
-            width: 250px; height: 100px;
-            display: flex; justify-content: center; align-items: center;
-            transition: all 1s ease;
-        }
-        .css-rakhi .thread {
-            position: absolute;
-            width: 120px; height: 4px;
-            background: linear-gradient(90deg, #8a2387, #e94057, #f27121);
-            border-radius: 2px;
-            z-index: 1;
-            box-shadow: 0 0 10px rgba(233, 64, 87, 0.5);
-        }
-        .css-rakhi .thread.left { right: 50%; transform-origin: right center; transform: rotate(-5deg); }
-        .css-rakhi .thread.right { left: 50%; transform-origin: left center; transform: rotate(5deg); }
-        
-        .css-rakhi .centerpiece {
-            position: relative; z-index: 2;
-            width: 80px; height: 80px;
-            background: radial-gradient(circle, var(--accent-gold-light), var(--accent-gold));
-            border-radius: 50%;
-            display: flex; justify-content: center; align-items: center;
-            box-shadow: 0 0 30px rgba(246, 211, 101, 0.6), inset 0 0 10px rgba(0,0,0,0.2);
-            border: 3px solid #fff;
-            animation: pulse 3s infinite;
-        }
-        .css-rakhi .centerpiece::before { /* Inner pattern */
-            content: '🌸'; font-size: 40px;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-        }
+        /* Center content vertically if screen is tall enough */
+        @media (min-height: 700px) { .page { justify-content: center; } }
 
-        /* Rakhi Tied Animation State */
-        .css-rakhi.tied .thread.left { transform: rotate(0deg) scaleX(1.5) translateX(-20px); }
-        .css-rakhi.tied .thread.right { transform: rotate(0deg) scaleX(1.5) translateX(20px); }
-        .css-rakhi.tied .centerpiece {
-            box-shadow: 0 0 60px rgba(246, 211, 101, 1), 0 0 100px rgba(255, 117, 140, 0.8);
-            transform: scale(1.1);
-        }
+        .page.active { opacity: 1; visibility: visible; pointer-events: all; transform: scale(1) translateY(0); }
 
-        .rakhi-message {
-            font-family: var(--font-serif);
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
-            color: var(--accent-gold-light);
-            text-align: center;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 1s ease 0.5s;
-            height: 0; overflow: hidden;
-        }
-        .rakhi-message.show { opacity: 1; transform: translateY(0); height: auto; margin-top: 1rem; }
-
-        /* --- Page 4: Special --- */
-        .special-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 2rem;
-            width: 100%;
-            max-width: 1000px;
-            margin-top: 2rem;
-        }
-        .feature-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.4s ease;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        .page.active .feature-card {
-            opacity: 1; transform: translateY(0);
-        }
-        /* Staggered entrance */
-        .page.active .feature-card:nth-child(1) { transition-delay: 0.1s; }
-        .page.active .feature-card:nth-child(2) { transition-delay: 0.3s; }
-        .page.active .feature-card:nth-child(3) { transition-delay: 0.5s; }
-        .page.active .feature-card:nth-child(4) { transition-delay: 0.7s; }
-
-        .feature-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            background: rgba(255, 255, 255, 0.12);
-            border-color: var(--accent-gold);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3), 0 0 20px rgba(246, 211, 101, 0.2);
-        }
-        .feature-icon { font-size: 3rem; margin-bottom: 1rem; }
-        .feature-title { font-family: var(--font-serif); font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--accent-gold); }
-        .feature-text { font-size: 0.95rem; color: var(--text-cream); }
-
-        /* --- Page 5: Gift --- */
-        .gift-container { perspective: 1000px; margin: 3rem 0; cursor: pointer; }
-        .css-gift {
-            position: relative; width: 160px; height: 160px;
-            transform-style: preserve-3d; transition: transform 0.5s;
-        }
-        .css-gift .box {
-            position: absolute; bottom: 0; width: 100%; height: 120px;
-            background: linear-gradient(135deg, #e94057, #f27121);
-            border-radius: 8px;
-            box-shadow: inset -10px -10px 20px rgba(0,0,0,0.2), 0 20px 40px rgba(0,0,0,0.4);
-            display: flex; justify-content: center;
-        }
-        .css-gift .box::after { /* Vertical Ribbon */
-            content: ''; position: absolute; width: 30px; height: 100%;
-            background: var(--accent-gold);
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
-        }
-        .css-gift .lid {
-            position: absolute; top: 10px; left: -10px; width: 180px; height: 40px;
-            background: linear-gradient(135deg, #f27121, #e94057);
-            border-radius: 6px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-            display: flex; justify-content: center;
-            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-            z-index: 2; transform-origin: bottom center;
-        }
-        .css-gift .lid::after { /* Lid Ribbon */
-            content: ''; position: absolute; width: 30px; height: 100%;
-            background: var(--accent-gold);
-        }
-        .css-gift .bow {
-            position: absolute; top: -30px; left: 50%; transform: translateX(-50%);
-            width: 80px; height: 40px; display: flex; justify-content: center; z-index: 3;
-            transition: all 0.8s;
-        }
-        .css-gift .bow::before, .css-gift .bow::after {
-            content: ''; width: 40px; height: 30px;
-            border: 10px solid var(--accent-gold); border-radius: 50%;
-            position: absolute;
-        }
-        .css-gift .bow::before { left: 0; transform: rotate(-20deg); }
-        .css-gift .bow::after { right: 0; transform: rotate(20deg); }
-
-        /* Gift Open State */
-        .css-gift.open .lid {
-            transform: translateY(-80px) rotateX(45deg) rotateZ(10deg);
-            opacity: 0;
-        }
-        .css-gift.open .bow { transform: translateX(-50%) translateY(-80px); opacity: 0; }
-        .css-gift.open .box {
-            box-shadow: 0 0 60px rgba(246, 211, 101, 0.8), 0 0 100px rgba(255, 255, 255, 0.5);
-        }
-        
-        .gift-reveal-msg {
-            font-family: var(--font-serif); font-size: clamp(1.2rem, 3vw, 2rem);
-            color: var(--text-main); margin-top: 1rem;
-            opacity: 0; transform: scale(0.9); transition: all 1s ease 0.5s;
-            max-width: 600px; text-align: center; height: 0; overflow: hidden;
-        }
-        .gift-reveal-msg.show { opacity: 1; transform: scale(1); height: auto; margin-top: 2rem; }
-
-        /* --- Page 6: Final Surprise --- */
-        #final { justify-content: center; z-index: 10; }
-        .cinematic-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #05020a; z-index: 5;
-            opacity: 0; pointer-events: none; transition: opacity 2s ease;
-        }
-        .cinematic-active .cinematic-overlay { opacity: 1; pointer-events: all; }
-        .cinematic-active nav { transform: translateY(-100%); } /* Hide nav in cinematic mode */
-        
-        .final-content { position: relative; z-index: 10; text-align: center; }
-        .final-text-sequence p {
-            font-family: var(--font-serif);
-            font-size: clamp(1.5rem, 4vw, 3rem);
-            color: var(--text-main);
-            opacity: 0; position: absolute; top: 50%; left: 50%;
-            transform: translate(-50%, -50%); width: 100%;
-            transition: opacity 1.5s ease;
-        }
-        .final-text-sequence p.visible { opacity: 1; }
-        
-        .grand-finale {
-            opacity: 0; transform: scale(0.8); transition: all 2s ease;
-            display: none; flex-direction: column; align-items: center; gap: 1.5rem;
-        }
-        .grand-finale.show { opacity: 1; transform: scale(1); display: flex; }
-        .grand-finale h1 {
-            font-family: var(--font-hand); font-size: clamp(4rem, 10vw, 8rem);
-            background: linear-gradient(to right, #ff758c, #ff7eb3, #f6d365);
+        /* Gradient Text */
+        .text-gradient {
+            background: linear-gradient(to right, #ffeba0, #ffd700, #ffeba0);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 40px rgba(255, 117, 140, 0.4); margin: 0; line-height: 1.1;
+            background-size: 200% auto; animation: gradient-x 4s linear infinite;
         }
 
-        /* =========================================
-           6. UTILITIES & ANIMATIONS
-           ========================================= */
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+        /* Custom Button */
+        .btn-custom {
+            position: relative; overflow: hidden;
+            background: linear-gradient(135deg, rgba(255,215,0,0.1), transparent);
+            border: 1px solid rgba(255,215,0,0.4); color: #ffeba0; transition: all 0.3s ease;
         }
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        .btn-custom::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,215,0,0.2), transparent); transition: left 0.5s ease;
+        }
+        .btn-custom:hover { box-shadow: 0 0 20px rgba(255,215,0,0.2); border-color: #ffd700; color: #fff; transform: translateY(-2px); }
+        .btn-custom:hover::before { left: 100%; }
+
+        .typing-cursor {
+            display: inline-block; width: 2px; height: 1em; background-color: #ffd700;
+            vertical-align: text-bottom; animation: blink 1s step-end infinite;
         }
         @keyframes blink { 50% { opacity: 0; } }
 
-        /* Floating Audio Button */
-        #music-toggle {
-            position: fixed; bottom: 2rem; right: 2rem;
-            width: 50px; height: 50px; border-radius: 50%;
-            background: var(--glass-bg); backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border); color: var(--accent-gold);
-            font-size: 1.5rem; display: flex; justify-content: center; align-items: center;
-            cursor: pointer; z-index: 99; box-shadow: var(--glass-shadow);
-            transition: all 0.3s;
+        /* Responsive CSS Rakhi */
+        .css-rakhi {
+            position: relative; width: 100%; max-width: 250px; height: 100px; margin: 0 auto;
+            display: flex; justify-content: center; align-items: center; transition: all 1s ease;
         }
-        #music-toggle:hover { background: rgba(255,255,255,0.2); transform: scale(1.1); }
+        .css-rakhi .thread {
+            position: absolute; width: 45%; max-width: 120px; height: 4px;
+            background: linear-gradient(90deg, #ffd700, #ff4b4b, #ffd700); border-radius: 2px;
+            z-index: 1; box-shadow: 0 0 10px rgba(255, 75, 75, 0.5);
+        }
+        .css-rakhi .thread.left { right: 50%; transform-origin: right center; transform: rotate(-8deg); }
+        .css-rakhi .thread.right { left: 50%; transform-origin: left center; transform: rotate(8deg); }
+        .css-rakhi .centerpiece {
+            position: relative; z-index: 2; width: 80px; height: 80px;
+            background: radial-gradient(circle, #ffeba0, #ffd700, #d4af37);
+            border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.4), inset 0 0 15px rgba(0,0,0,0.3);
+            border: 4px solid #fff; animation: pulse-slow 3s infinite; flex-shrink: 0;
+        }
+        .css-rakhi .centerpiece::before { content: '🕉️'; font-size: 35px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
         
-        footer {
-            position: fixed; bottom: 1rem; width: 100%; text-align: center;
-            font-size: 0.8rem; color: rgba(255,255,255,0.5); z-index: 10;
-            pointer-events: none;
-        }
-        .cinematic-active footer { opacity: 0; }
+        .css-rakhi.tied .thread.left { transform: rotate(0deg) scaleX(1.4) translateX(-10%); }
+        .css-rakhi.tied .thread.right { transform: rotate(0deg) scaleX(1.4) translateX(10%); }
+        .css-rakhi.tied .centerpiece { box-shadow: 0 0 50px rgba(255, 215, 0, 0.8), 0 0 80px rgba(255, 75, 75, 0.5); transform: scale(1.1); }
 
-        /* =========================================
-           7. RESPONSIVE DESIGN (Media Queries)
-           ========================================= */
-        @media (max-width: 768px) {
-            .hamburger { display: flex; }
-            .nav-links {
-                position: fixed; top: 0; right: -100%; width: 70%; height: 100vh;
-                background: rgba(26, 11, 46, 0.95); backdrop-filter: blur(20px);
-                flex-direction: column; justify-content: center; align-items: center;
-                transition: right 0.4s ease; border-left: 1px solid var(--glass-border);
-            }
-            .nav-links.nav-active { right: 0; }
-            .hamburger.toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-            .hamburger.toggle span:nth-child(2) { opacity: 0; }
-            .hamburger.toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-            
-            .special-grid { grid-template-columns: 1fr; }
-            .css-rakhi { transform: scale(0.8); }
-            .btn { padding: 0.8rem 2rem; width: 100%; justify-content: center; }
-            #music-toggle { bottom: 1rem; right: 1rem; width: 40px; height: 40px; font-size: 1.2rem; }
-            .glass-card { padding: 1.5rem; border-radius: 16px; }
+        /* Responsive CSS Gift */
+        .css-gift {
+            position: relative; width: 140px; height: 140px; margin: 0 auto;
+            transform-style: preserve-3d; transition: transform 0.5s; cursor: pointer;
         }
+        .css-gift .box {
+            position: absolute; bottom: 0; left: 0; right: 0; height: 100px;
+            background: linear-gradient(135deg, #c73866, #8a235c); border-radius: 12px;
+            box-shadow: inset -10px -10px 20px rgba(0,0,0,0.3), 0 20px 40px rgba(0,0,0,0.5);
+            display: flex; justify-content: center; margin: 0 auto; width: 100%;
+        }
+        .css-gift .box::after { content: ''; position: absolute; width: 25px; height: 100%; background: #ffd700; box-shadow: inset 0 0 10px rgba(0,0,0,0.2); }
+        .css-gift .lid {
+            position: absolute; top: 15px; left: -5%; width: 110%; height: 40px;
+            background: linear-gradient(135deg, #e84a7e, #c73866); border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4); display: flex; justify-content: center;
+            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1); z-index: 2; transform-origin: bottom center;
+        }
+        .css-gift .lid::after { content: ''; position: absolute; width: 25px; height: 100%; background: #ffd700; }
+        .css-gift .bow {
+            position: absolute; top: -30px; left: 50%; transform: translateX(-50%);
+            width: 70px; height: 35px; display: flex; justify-content: center; z-index: 3; transition: all 0.8s;
+        }
+        .css-gift .bow::before, .css-gift .bow::after {
+            content: ''; width: 35px; height: 30px; border: 8px solid #ffd700; border-radius: 50%; position: absolute;
+        }
+        .css-gift .bow::before { left: -3px; transform: rotate(-20deg); }
+        .css-gift .bow::after { right: -3px; transform: rotate(20deg); }
+        
+        .css-gift.open .lid { transform: translateY(-80px) rotateX(60deg) rotateZ(15deg); opacity: 0; }
+        .css-gift.open .bow { transform: translateX(-50%) translateY(-80px); opacity: 0; }
+        .css-gift.open .box { box-shadow: 0 0 60px rgba(255, 215, 0, 0.6), 0 0 100px rgba(255, 255, 255, 0.3); }
 
-        @media (max-height: 600px) and (orientation: landscape) {
-            .page { padding-top: calc(var(--nav-height) + 1rem); }
-            .hero-rakhi-icon { font-size: 3rem; margin-bottom: 0.5rem; }
-            h1 { font-size: 2rem !important; }
-            .glass-card { padding: 1rem; }
-            .special-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-            .feature-card { padding: 1rem; }
-            .feature-icon { font-size: 2rem; margin-bottom: 0.5rem;}
+        /* Joke Text Styling */
+        .joke-text { opacity: 0; transform: translateY(10px); transition: all 0.4s ease; min-height: 60px; display: flex; align-items: center; justify-content: center; }
+        .joke-text.show { opacity: 1; transform: translateY(0); }
+
+        .cinematic-overlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000;
+            z-index: 100; opacity: 0; pointer-events: none; transition: opacity 2s ease;
+            display: flex; justify-content: center; align-items: center; overflow: hidden;
         }
+        .cinematic-active .cinematic-overlay { opacity: 1; pointer-events: all; }
+        
+        .final-seq-text {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 90%; max-width: 800px; text-align: center;
+            opacity: 0; transition: opacity 1.5s ease;
+        }
+        .final-seq-text.visible { opacity: 1; }
+
+        /* Mobile Nav Toggle */
+        .hamburger span { transition: all 0.3s; }
+        .nav-mobile-active { right: 0 !important; }
+        .hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
     </style>
 </head>
-<body>
+<body class="antialiased selection:bg-brand-gold selection:text-brand-dark">
 
-    <!-- Dynamic Background -->
-    <div class="bg-gradient"></div>
-    <div id="particles"></div>
-    <div class="cinematic-overlay" id="cinematic-overlay"></div>
+    <div class="bg-mesh"></div>
+    <div id="particles-js"></div>
+    
+    <!-- Cinematic Finale Container -->
+    <div class="cinematic-overlay" id="cinematic-overlay">
+        <div id="cinematic-texts" class="relative w-full h-full max-w-5xl mx-auto">
+            <h2 id="seq-1" class="final-seq-text font-serif text-4xl md:text-6xl text-white tracking-wide">Anvi...</h2>
+            <p id="seq-2" class="final-seq-text font-sans text-xl md:text-3xl lg:text-4xl text-gray-200 font-light leading-relaxed">Blood didn't make us family. The universe just knew my life would be incomplete without a sister like you.</p>
+            <p id="seq-3" class="final-seq-text font-sans text-xl md:text-3xl lg:text-4xl text-gray-200 font-light leading-relaxed">I know we will grow older, and life might take us on different paths...</p>
+            <p id="seq-4" class="final-seq-text font-sans text-xl md:text-3xl lg:text-4xl text-gray-200 font-light leading-relaxed">...but my promise is eternal: on your darkest days, when the world feels heavy and you want to give up...</p>
+            <p id="seq-5" class="final-seq-text font-sans text-xl md:text-3xl lg:text-4xl text-gray-200 font-light leading-relaxed">...just remember you have a brother who would fight the whole world for you. I will never let you fall.</p>
+            
+            <div id="seq-final" class="final-seq-text flex flex-col items-center justify-center w-full">
+                <h1 class="font-script text-5xl md:text-8xl lg:text-9xl text-gradient !leading-tight drop-shadow-2xl mb-8">Happy Raksha Bandhan,<br>Anvi! ❤️</h1>
+                <p class="font-sans text-lg md:text-2xl text-gray-300 font-light mb-12">I love you endlessly. You are my forever sister.</p>
+                <button onclick="resetApp()" class="px-8 py-3 md:px-10 md:py-4 rounded-full btn-custom text-sm md:text-base font-medium tracking-wide">Replay Experience 🔄</button>
+            </div>
+        </div>
+    </div>
 
-    <!-- Navigation -->
-    <nav>
-        <a href="#" class="nav-logo" onclick="navigateTo('home')">Forever Bond ✨</a>
-        <ul class="nav-links">
-            <li><a onclick="navigateTo('home')" class="active">🏠 Home</a></li>
-            <li><a onclick="navigateTo('letter')">💌 Letter</a></li>
-            <li><a onclick="navigateTo('rakhi')">🎀 Rakhi</a></li>
-            <li><a onclick="navigateTo('special')">❤️ Sister</a></li>
-            <li><a onclick="navigateTo('gift')">🎁 Gift</a></li>
-            <li><a onclick="navigateTo('final')">✨ Surprise</a></li>
-        </ul>
-        <div class="hamburger">
-            <span></span><span></span><span></span>
+    <nav class="fixed top-0 w-full z-50 glass border-b-0 border-white/10 transition-transform duration-500" id="main-nav">
+        <div class="max-w-7xl mx-auto px-6 h-16 md:h-20 flex justify-between items-center w-full">
+            <a href="#" onclick="navigateTo('home')" class="font-serif text-xl md:text-2xl font-bold text-brand-gold tracking-wider">Forever Bond ✨</a>
+            
+            <!-- Desktop Nav -->
+            <div class="hidden md:flex space-x-8 font-medium text-sm text-gray-300">
+                <a onclick="navigateTo('home')" class="nav-link cursor-pointer hover:text-brand-gold transition-colors active text-brand-gold">Home</a>
+                <a onclick="navigateTo('letter')" class="nav-link cursor-pointer hover:text-brand-gold transition-colors">Letter</a>
+                <a onclick="navigateTo('rakhi')" class="nav-link cursor-pointer hover:text-brand-gold transition-colors">Rakhi</a>
+                <a onclick="navigateTo('special')" class="nav-link cursor-pointer hover:text-brand-gold transition-colors">Sister</a>
+                <a onclick="navigateTo('gift')" class="nav-link cursor-pointer hover:text-brand-gold transition-colors">Surprise</a>
+            </div>
+
+            <!-- Mobile Hamburger -->
+            <button class="md:hidden hamburger flex flex-col gap-[5px] z-[60] p-2" id="mobile-menu-btn" aria-label="Toggle Menu">
+                <span class="w-6 h-[2px] bg-white block rounded-full"></span>
+                <span class="w-6 h-[2px] bg-white block rounded-full"></span>
+                <span class="w-6 h-[2px] bg-white block rounded-full"></span>
+            </button>
+        </div>
+
+        <!-- Mobile Nav Menu Panel -->
+        <div id="mobile-menu" class="fixed top-0 -right-full w-4/5 max-w-sm h-screen glass border-l border-white/10 flex flex-col justify-center items-center space-y-8 text-2xl transition-all duration-500 z-50 md:hidden shadow-2xl">
+            <a onclick="navigateTo('home')" class="nav-link-mobile text-brand-gold font-serif">Home</a>
+            <a onclick="navigateTo('letter')" class="nav-link-mobile text-gray-300 font-serif">Letter</a>
+            <a onclick="navigateTo('rakhi')" class="nav-link-mobile text-gray-300 font-serif">Rakhi</a>
+            <a onclick="navigateTo('special')" class="nav-link-mobile text-gray-300 font-serif">Sister</a>
+            <a onclick="navigateTo('gift')" class="nav-link-mobile text-gray-300 font-serif">Surprise</a>
         </div>
     </nav>
 
-    <!-- Main Content SPA -->
-    <main>
+    <main class="w-full h-full relative" id="main-content">
         
         <!-- PAGE 1: HOME -->
         <section id="home" class="page active">
-            <div class="hero-content">
-                <div class="hero-rakhi-icon">🪔</div>
-                <h1>Happy Raksha Bandhan, <br> <span class="text-gradient">My Dear Sister!</span> ❤️</h1>
-                <p>I made something special just for you...</p>
-                <button class="btn" onclick="navigateTo('letter')">Start Your Surprise ✨</button>
+            <div class="text-center px-4 w-full max-w-4xl flex flex-col items-center">
+                <div class="text-7xl md:text-9xl mb-6 animate-float drop-shadow-[0_0_20px_rgba(255,215,0,0.4)]">🪔</div>
+                <h1 class="font-serif text-4xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight">
+                    Happy Raksha Bandhan,<br>
+                    <span class="font-script text-6xl md:text-8xl lg:text-9xl text-gradient font-normal mt-2 md:mt-4 block drop-shadow-lg">Anvi Penta! ❤️</span>
+                </h1>
+                <p class="text-base md:text-xl lg:text-2xl text-gray-300 font-light mt-6 mb-10 max-w-2xl px-2">I built this little corner of the internet just to remind you how incredibly special you are to me.</p>
+                <button onclick="navigateTo('letter')" class="px-8 py-4 rounded-full btn-custom text-lg md:text-xl flex items-center gap-3 shadow-[0_10px_30px_-10px_rgba(255,215,0,0.5)]">
+                    Start Your Surprise ✨
+                </button>
             </div>
         </section>
 
         <!-- PAGE 2: LETTER -->
         <section id="letter" class="page">
-            <div class="glass-card letter-container">
-                <h2 class="letter-greeting">Dear Sister,</h2>
-                <div class="letter-body">
+            <div class="glass rounded-3xl p-6 md:p-12 w-[90%] max-w-3xl shadow-2xl relative mt-4">
+                <div class="absolute -top-6 -left-4 md:-left-6 text-5xl md:text-6xl opacity-50 animate-pulse">✨</div>
+                <h2 class="font-script text-4xl md:text-6xl text-brand-gold mb-6 border-b border-white/10 pb-4 inline-block">Dear Anvi,</h2>
+                <div class="font-sans text-sm md:text-lg text-gray-200 leading-relaxed font-light min-h-[220px] md:min-h-[200px]">
                     <span id="typed-text"></span><span class="typing-cursor"></span>
                 </div>
-                <div class="letter-footer" id="letter-btn">
-                    <button class="btn" onclick="navigateTo('rakhi')">Continue ❤️</button>
+                <div id="letter-btn-container" class="mt-8 text-center opacity-0 transition-opacity duration-1000">
+                    <button onclick="navigateTo('rakhi')" class="px-8 py-3 rounded-full btn-custom text-sm md:text-base">Tie The Rakhi 🎀</button>
                 </div>
             </div>
         </section>
 
         <!-- PAGE 3: RAKHI -->
         <section id="rakhi" class="page">
-            <h2 style="font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 3rem; text-align: center;">A Bond That Never Breaks 🎀</h2>
-            <div class="rakhi-showcase">
-                <div class="css-rakhi" id="interactive-rakhi">
-                    <div class="thread left"></div>
-                    <div class="centerpiece"></div>
-                    <div class="thread right"></div>
-                </div>
+            <div class="text-center w-full max-w-4xl px-4 mt-8 md:mt-0">
+                <h2 class="font-serif text-3xl md:text-5xl lg:text-6xl font-bold mb-12 md:mb-16">The Thread of Protection</h2>
                 
-                <button class="btn" id="tie-rakhi-btn" onclick="tieRakhi()">Tie The Rakhi 🎀</button>
-                
-                <div class="rakhi-message" id="rakhi-msg">
-                    <p>A bond of love, laughter, protection, and forever. ❤️</p>
-                    <button class="btn" onclick="navigateTo('special')" style="font-size: 1rem; padding: 0.8rem 2rem; margin-top:1rem;">Next Surprise →</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- PAGE 4: SPECIAL -->
-        <section id="special" class="page">
-            <h2 style="font-size: clamp(2rem, 4vw, 3rem); text-align: center;">Why You're The Best Sister ❤️</h2>
-            <div class="special-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">💖</div>
-                    <h3 class="feature-title">You Make Life Happier</h3>
-                    <p class="feature-text">Everything is a little more fun with you around.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">😂</div>
-                    <h3 class="feature-title">Professional Annoyer</h3>
-                    <p class="feature-text">You somehow know exactly how to annoy me (but I secretly love it).</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🌸</div>
-                    <h3 class="feature-title">You Make Moments Special</h3>
-                    <p class="feature-text">Even ordinary days become memorable with you.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🤝</div>
-                    <h3 class="feature-title">Always There</h3>
-                    <p class="feature-text">Knowing you're there makes everything feel easier.</p>
-                </div>
-            </div>
-            <button class="btn" onclick="navigateTo('gift')">There's More... 👀</button>
-        </section>
-
-        <!-- PAGE 5: GIFT -->
-        <section id="gift" class="page">
-            <h2 style="font-size: clamp(2rem, 4vw, 3rem); text-align: center;">I Have One Little Gift For You 🎁</h2>
-            <div class="gift-container" onclick="openGift()">
-                <div class="css-gift" id="interactive-gift">
-                    <div class="box"></div>
-                    <div class="lid">
-                        <div class="bow"></div>
+                <div class="mb-12 md:mb-16 w-full flex justify-center">
+                    <div class="css-rakhi" id="interactive-rakhi">
+                        <div class="thread left"></div>
+                        <div class="centerpiece"></div>
+                        <div class="thread right"></div>
                     </div>
                 </div>
-            </div>
-            <button class="btn" id="open-gift-btn" onclick="openGift()">Tap to Open 🎀</button>
-            
-            <div class="gift-reveal-msg" id="gift-msg">
-                <p>This little gift may be simple, but it carries a lot of love. I hope it makes you smile. ❤️</p>
-                <button class="btn" onclick="navigateTo('final')">One Last Thing... ✨</button>
-            </div>
-        </section>
-
-        <!-- PAGE 6: FINAL SURPRISE -->
-        <section id="final" class="page">
-            <div class="final-content" id="final-initial">
-                <h2 style="font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 2rem;">Wait... There's One More Surprise 👀</h2>
-                <button class="btn" style="box-shadow: 0 0 30px rgba(246,211,101,0.5);" onclick="triggerCinematicReveal()">Reveal It ✨</button>
-            </div>
-
-            <div class="final-text-sequence" id="final-sequence">
-                <p id="seq-1">We might grow older, and our lives might get busier...</p>
-                <p id="seq-2">But no matter how much time passes or how much changes...</p>
-                <p id="seq-3">You will always be my favorite person to annoy, and my most precious sister.</p>
-                <p id="seq-4">I promise to always protect you, stand by you, and cheer for you.</p>
-                <p id="seq-5">Because a bond like ours is forever. ❤️</p>
-            </div>
-
-            <div class="grand-finale" id="grand-finale">
-                <h1>Happy Raksha Bandhan, Sis! 🎀❤️</h1>
-                <p style="font-size: 1.5rem; color: var(--accent-gold-light);">Thank you for being the best part of my life. I love you!</p>
-                <button class="btn" onclick="resetApp()" style="margin-top: 3rem; font-size: 1rem; padding: 0.8rem 2rem;">Replay Experience 🔄</button>
+                
+                <button id="tie-rakhi-btn" onclick="tieRakhi()" class="px-10 py-4 rounded-full btn-custom text-lg md:text-xl shadow-[0_10px_30px_-10px_rgba(255,75,75,0.4)] border-brand-pink text-white hover:border-brand-gold transition-all duration-300">
+                    Tap to Tie Rakhi 🎀
+                </button>
+                
+                <div id="rakhi-msg" class="opacity-0 translate-y-4 transition-all duration-1000 hidden flex-col items-center mt-6 md:mt-8">
+                    <p class="font-serif text-xl md:text-3xl text-brand-lightGold italic mb-6 md:mb-8 px-4">Tied with love, sealed with a promise. ❤️</p>
+                    <button onclick="navigateTo('special')" class="px-8 py-3 rounded-full btn-custom text-sm md:text-base">See What's Next →</button>
+                </div>
             </div>
         </section>
 
+        <!-- PAGE 4: SPECIAL (SISTER TRIBUTES) -->
+        <section id="special" class="page">
+            <div class="text-center w-full max-w-6xl px-4 mt-4 md:mt-0">
+                <h2 class="font-serif text-3xl md:text-5xl font-bold mb-2 md:mb-4 text-white">Why Anvi is the Best</h2>
+                <p class="text-gray-400 mb-8 md:mb-12 font-light tracking-widest uppercase text-xs md:text-sm">(and also the most annoying)</p>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-10 md:mb-12">
+                    <!-- Grid Cards -->
+                    <div class="glass p-5 md:p-6 rounded-2xl hover:-translate-y-2 transition-transform duration-300 border border-white/5 hover:border-brand-gold/40 group flex flex-col items-center text-center">
+                        <div class="text-4xl md:text-5xl mb-3 md:mb-4 group-hover:animate-bounce">😂</div>
+                        <h3 class="font-serif text-lg md:text-xl text-brand-gold mb-2">Professional Annoyer</h3>
+                        <p class="text-xs md:text-sm text-gray-300 font-light">You have a PhD in knowing exactly how to get on my nerves (but I secretly love it).</p>
+                    </div>
+                    <div class="glass p-5 md:p-6 rounded-2xl hover:-translate-y-2 transition-transform duration-300 border border-white/5 hover:border-brand-gold/40 group flex flex-col items-center text-center">
+                        <div class="text-4xl md:text-5xl mb-3 md:mb-4 group-hover:scale-110 transition-transform">💖</div>
+                        <h3 class="font-serif text-lg md:text-xl text-brand-gold mb-2">Heart of Gold</h3>
+                        <p class="text-xs md:text-sm text-gray-300 font-light">Beneath all the sibling banter, you have the kindest heart and always care for everyone.</p>
+                    </div>
+                    <div class="glass p-5 md:p-6 rounded-2xl hover:-translate-y-2 transition-transform duration-300 border border-white/5 hover:border-brand-gold/40 group flex flex-col items-center text-center">
+                        <div class="text-4xl md:text-5xl mb-3 md:mb-4 group-hover:rotate-12 transition-transform">📸</div>
+                        <h3 class="font-serif text-lg md:text-xl text-brand-gold mb-2">Partner in Crime</h3>
+                        <p class="text-xs md:text-sm text-gray-300 font-light">From covering up mistakes to sharing inside jokes that nobody else understands.</p>
+                    </div>
+                    <div class="glass p-5 md:p-6 rounded-2xl hover:-translate-y-2 transition-transform duration-300 border border-white/5 hover:border-brand-gold/40 group flex flex-col items-center text-center">
+                        <div class="text-4xl md:text-5xl mb-3 md:mb-4 group-hover:scale-110 transition-transform">🛡️</div>
+                        <h3 class="font-serif text-lg md:text-xl text-brand-gold mb-2">Forever Protected</h3>
+                        <p class="text-xs md:text-sm text-gray-300 font-light">My job is to protect you, but honestly, having you as my sister makes me feel strong.</p>
+                    </div>
+                </div>
+                
+                <button onclick="navigateTo('gift')" class="px-8 py-3 md:px-10 md:py-4 rounded-full btn-custom text-base md:text-lg">Time for your Gift! 🎁</button>
+            </div>
+        </section>
+
+        <!-- PAGE 5: GIFT & JOKES -->
+        <section id="gift" class="page">
+            <div class="text-center w-full max-w-3xl px-4 flex flex-col items-center mt-4 md:mt-0">
+                <h2 class="font-serif text-3xl md:text-5xl font-bold mb-10 md:mb-16">I got you something...</h2>
+                
+                <div class="mb-8 md:mb-12 w-full flex justify-center" onclick="handleGiftInteraction()">
+                    <div class="css-gift" id="interactive-gift">
+                        <div class="box"></div>
+                        <div class="lid"><div class="bow"></div></div>
+                    </div>
+                </div>
+                
+                <!-- Dynamic Joke Text Area -->
+                <div class="w-full px-4 mb-8 min-h-[80px] flex items-center justify-center">
+                    <p id="joke-display" class="joke-text text-lg md:text-2xl font-serif text-brand-lightGold italic text-center w-full leading-relaxed">
+                        Tap the gift to open it!
+                    </p>
+                </div>
+
+                <div id="final-btn-container" class="opacity-0 transition-opacity duration-1000 hidden mt-4">
+                    <button onclick="triggerCinematicFinal()" class="px-6 py-3 md:px-8 md:py-4 rounded-full btn-custom border-brand-pink text-white text-sm md:text-base shadow-[0_0_20px_rgba(255,215,0,0.3)] hover:scale-105">
+                        Wait, there's one more thing... ✨
+                    </button>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <footer>Made with ❤️ especially for my amazing sister.</footer>
+    <!-- Audio Toggle -->
+    <button id="music-toggle" class="fixed bottom-6 right-6 w-12 h-12 md:w-14 md:h-14 glass rounded-full flex items-center justify-center text-xl md:text-2xl cursor-pointer hover:scale-110 hover:bg-white/10 transition-all z-[90] text-white shadow-lg border-white/20 focus:outline-none" onclick="toggleMusic()" aria-label="Toggle Music">
+        🔇
+    </button>
+    
+    <footer id="app-footer" class="fixed bottom-2 w-full text-center text-[10px] md:text-xs text-white/30 z-[40] pointer-events-none tracking-widest font-light transition-opacity duration-500">
+        MADE WITH ❤️ FOR ANVI PENTA
+    </footer>
 
-    <!-- Audio Player (Hidden) -->
-    <!-- DEVELOPER NOTE: Replace the src with your own elegant MP3 file url. 
-         A gentle piano or acoustic track is recommended. -->
-    <audio id="bg-music" loop>
+    <!-- Audio Player (Elegant Background Music) -->
+    <audio id="bg-music" loop preload="auto">
+        <!-- Royalty free emotional/uplifting ambient track -->
         <source src="https://assets.mixkit.co/music/preview/mixkit-beautiful-dream-493.mp3" type="audio/mpeg">
     </audio>
-    <div id="music-toggle" onclick="toggleMusic()">🎵</div>
 
-    <!-- =========================================
-         8. JAVASCRIPT LOGIC
-         ========================================= -->
     <script>
-        /* --- CONFIGURATION --- */
-        // Edit this letter to customize your message.
-        const letterContent = `On this Raksha Bandhan, I just want you to know how incredibly special you are to me.
-        
-We may fight, tease each other, and annoy each other sometimes, but no matter what happens, you'll always have a very special place in my heart. 
+        /* --- CONSTANTS & DATA --- */
+        const letterContent = `We might not share the same parents or childhood memories, but school brought us together and gave me an amazing sister.
 
-Thank you for all the laughter, silly arguments, support, and countless little moments we've shared. You're not just my sister. You're someone I'll always care about, support, and protect.
+From surviving classes to our random conversations and endless laughter, every moment has shown me how lucky I am to have found a sister in you.
 
-This Rakhi is a reminder that no matter where life takes us, our bond will always remain special.
+Blood doesn't always make a sibling; sometimes, it's the bond we choose. You're the most annoying, yet the most caring person I know.
 
-Happy Raksha Bandhan! ❤️
+This Rakhi is a reminder that no matter where life takes us after school, I've got your back. Always.
 
-With lots of love,
-Your Brother`;
+Happy Raksha Bandhan! ❤️`;
 
-        /* --- STATE VARIABLES --- */
+        // The Funny Joke Sequence Array (2nd Last Scene Requirement)
+        const jokes = [
+            "Wait, you actually thought I bought you a real gift? 😂",
+            "In this economy?! Come on Anvi... 📉",
+            "I searched everywhere for the perfect gift...",
+            "...but then I remembered you already have the greatest gift: ME! 🦸‍♂️",
+            "Okay, okay, fine. I'm kidding. Tap one last time for your real gift..."
+        ];
+
+        /* --- STATE --- */
         let currentPage = 'home';
-        let typeWriterTimeout;
-        let isGiftOpened = false;
-        let isRakhiTied = false;
         let isMusicPlaying = false;
+        let typeWriterTimeout;
+        let giftClicks = 0;
+        let isRakhiTied = false;
+        let isAnimating = false; // Prevent double clicks during transitions
 
-        /* --- NAVIGATION LOGIC --- */
+        /* --- DOM ELEMENTS --- */
         const pages = document.querySelectorAll('.page');
-        const navLinks = document.querySelectorAll('.nav-links a');
-        const hamburger = document.querySelector('.hamburger');
-        const navMenu = document.querySelector('.nav-links');
+        const desktopLinks = document.querySelectorAll('.nav-link');
+        const mobileLinks = document.querySelectorAll('.nav-link-mobile');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mainNav = document.getElementById('main-nav');
+        const appFooter = document.getElementById('app-footer');
 
-        // Mobile Menu Toggle
-        hamburger.addEventListener('click', () => {
-            navMenu.classList.toggle('nav-active');
-            hamburger.classList.toggle('toggle');
+        /* --- MOBILE NAVIGATION --- */
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('nav-mobile-active');
+            mobileMenuBtn.classList.toggle('active');
         });
 
+        /* --- SPA NAVIGATION LOGIC --- */
         function navigateTo(pageId) {
-            // Close mobile menu if open
-            if(navMenu.classList.contains('nav-active')) {
-                navMenu.classList.remove('nav-active');
-                hamburger.classList.remove('toggle');
+            if(isAnimating) return;
+            isAnimating = true;
+
+            // Close mobile menu
+            mobileMenu.classList.remove('nav-mobile-active');
+            mobileMenuBtn.classList.remove('active');
+
+            // Handle active classes for pages
+            pages.forEach(p => p.classList.remove('active'));
+            const target = document.getElementById(pageId);
+            if(target) {
+                target.classList.add('active');
+                // Ensure page scrolls to top on load
+                target.scrollTop = 0;
             }
 
-            // Hide all pages
-            pages.forEach(page => {
-                page.classList.remove('active');
-            });
+            // Update Link Highlighting
+            const updateLinks = (links) => {
+                links.forEach(l => {
+                    l.classList.remove('text-brand-gold');
+                    if(l.getAttribute('onclick').includes(pageId)) {
+                        l.classList.add('text-brand-gold');
+                    } else {
+                        l.classList.add('text-gray-300');
+                    }
+                });
+            };
+            updateLinks(desktopLinks);
+            updateLinks(mobileLinks);
 
-            // Update Nav Links
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if(link.getAttribute('onclick').includes(pageId)) {
-                    link.classList.add('active');
-                }
-            });
+            // Handle Page Specifics
+            if(pageId === 'letter') {
+                startTyping();
+            } else {
+                clearTimeout(typeWriterTimeout); // Stop typing if moved away
+            }
 
-            // Show selected page
-            const targetPage = document.getElementById(pageId);
-            targetPage.classList.add('active');
-            currentPage = pageId;
+            // Reset animation lock after transition duration
+            setTimeout(() => { isAnimating = false; }, 600);
+        }
+
+        /* --- STREAMING_CHUNK:Typing Effect Logic --- */
+        function startTyping() {
+            const textContainer = document.getElementById('typed-text');
+            const btnContainer = document.getElementById('letter-btn-container');
             
-            // Scroll to top
-            targetPage.scrollTop = 0;
-
-            // Trigger specific page animations
-            handlePageTriggers(pageId);
+            // Reset
+            textContainer.innerHTML = '';
+            btnContainer.classList.remove('opacity-100');
+            btnContainer.classList.add('opacity-0');
+            clearTimeout(typeWriterTimeout);
+            
+            // Start
+            setTimeout(() => {
+                typeWriter(letterContent, textContainer, btnContainer, 0);
+            }, 600);
         }
 
-        function handlePageTriggers(pageId) {
-            // Letter Typing Effect Trigger
-            if (pageId === 'letter') {
-                const textContainer = document.getElementById('typed-text');
-                const btn = document.getElementById('letter-btn');
-                textContainer.innerHTML = '';
-                btn.style.opacity = '0';
-                clearTimeout(typeWriterTimeout);
-                
-                let i = 0;
-                // Add minor delay for transition to finish
-                setTimeout(() => {
-                    typeWriter(letterContent, textContainer, btn, 0);
-                }, 500);
-            }
-        }
+        function typeWriter(text, element, btnContainer, index) {
+            // Check if user navigated away
+            if (!document.getElementById('letter').classList.contains('active')) return;
 
-        /* --- TYPING EFFECT --- */
-        function typeWriter(text, element, btnElement, index) {
             if (index < text.length) {
-                // Handle newlines
                 if(text.charAt(index) === '\n') {
                     element.innerHTML += '<br>';
                 } else {
                     element.innerHTML += text.charAt(index);
                 }
                 index++;
-                typeWriterTimeout = setTimeout(() => typeWriter(text, element, btnElement, index), 30); // Typing speed
+                typeWriterTimeout = setTimeout(() => typeWriter(text, element, btnContainer, index), 35);
             } else {
-                // Done typing
-                btnElement.style.opacity = '1';
-                createParticles(20, '🌸'); // Mini celebration
+                btnContainer.classList.remove('opacity-0');
+                btnContainer.classList.add('opacity-100');
+                spawnParticles(15, '✨');
             }
         }
 
-        /* --- INTERACTIVE RAKHI --- */
+        /* --- STREAMING_CHUNK:Rakhi Interactive Logic --- */
         function tieRakhi() {
             if(isRakhiTied) return;
-            const rakhi = document.getElementById('interactive-rakhi');
-            const msg = document.getElementById('rakhi-msg');
+            isRakhiTied = true;
+            
+            const rakhiArt = document.getElementById('interactive-rakhi');
             const btn = document.getElementById('tie-rakhi-btn');
-            
+            const msg = document.getElementById('rakhi-msg');
+
+            rakhiArt.classList.add('tied');
             btn.style.display = 'none';
-            rakhi.classList.add('tied');
             
-            // Confetti effect
-            createParticles(30, '✨');
-            createParticles(20, '💖');
-            
+            msg.classList.remove('hidden');
+            // Small delay to allow CSS display:flex to apply before transition
             setTimeout(() => {
-                msg.classList.add('show');
-                isRakhiTied = true;
-            }, 800);
+                msg.classList.remove('opacity-0', 'translate-y-4');
+                msg.classList.add('opacity-100', 'translate-y-0');
+            }, 50);
+
+            // Celebration
+            spawnParticles(30, '✨');
+            spawnParticles(20, '💖');
+            
+            // Haptic feedback if supported
+            if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
         }
 
-        /* --- INTERACTIVE GIFT --- */
-        function openGift() {
-            if(isGiftOpened) return;
-            const gift = document.getElementById('interactive-gift');
-            const msg = document.getElementById('gift-msg');
-            const btn = document.getElementById('open-gift-btn');
+        /* --- STREAMING_CHUNK:Funny Gift Scene Logic --- */
+        function handleGiftInteraction() {
+            const display = document.getElementById('joke-display');
+            const giftBox = document.getElementById('interactive-gift');
             
-            btn.style.display = 'none';
-            gift.classList.add('open');
-            
-            // Big burst of particles
-            createParticles(40, '🎉');
-            createParticles(30, '✨');
-            createParticles(20, '💖');
-            
-            setTimeout(() => {
-                msg.classList.add('show');
-                isGiftOpened = true;
-            }, 1000);
+            if (giftBox.classList.contains('open')) return; // Already opened
+
+            if (giftClicks < jokes.length) {
+                // Fade out text
+                display.classList.remove('show');
+                
+                // Shake box slightly
+                giftBox.style.transform = `scale(0.95) rotate(${(Math.random()-0.5)*10}deg)`;
+                setTimeout(() => { giftBox.style.transform = 'scale(1) rotate(0deg)'; }, 150);
+
+                setTimeout(() => {
+                    display.innerText = jokes[giftClicks];
+                    display.classList.add('show');
+                    giftClicks++;
+                    
+                    spawnParticles(3, '😂', window.innerWidth/2, window.innerHeight/2);
+
+                    // If it was the last joke, open automatically after a delay
+                    if(giftClicks === jokes.length) {
+                        setTimeout(() => {
+                            openGiftBox();
+                        }, 3000); // 3 seconds to read the last joke
+                    }
+                }, 400); // Wait for fade out
+            }
         }
 
-        /* --- FINAL CINEMATIC SURPRISE --- */
-        async function triggerCinematicReveal() {
+        function openGiftBox() {
+            const giftBox = document.getElementById('interactive-gift');
+            if(giftBox.classList.contains('open')) return;
+
+            giftBox.classList.add('open');
+            const display = document.getElementById('joke-display');
+            display.classList.remove('show');
+            
+            setTimeout(() => {
+                display.innerText = "A lifetime supply of my annoying jokes and unconditional love! 🎁💖";
+                display.classList.add('show');
+                
+                const btn = document.getElementById('final-btn-container');
+                btn.classList.remove('hidden');
+                setTimeout(() => btn.classList.add('opacity-100'), 50);
+                
+                // Grand Burst
+                spawnParticles(50, '🎉');
+                spawnParticles(40, '✨');
+                spawnParticles(20, '💖');
+                
+                if (navigator.vibrate) navigator.vibrate([200, 100, 200, 100, 500]);
+            }, 600);
+        }
+
+        /* --- STREAMING_CHUNK:Emotional Finale Sequence --- */
+        async function triggerCinematicFinal() {
+            // Lock UI and show overlay
             document.body.classList.add('cinematic-active');
-            document.getElementById('final-initial').style.display = 'none';
+            mainNav.style.transform = 'translateY(-100%)';
+            appFooter.style.opacity = '0';
             
-            const finale = document.getElementById('grand-finale');
-
-            // Cinematic Particle Flow
-            startCinematicParticles();
-
-            // A helper to pause execution
+            // Helper function for delays
             const delay = (ms) => new Promise(res => setTimeout(res, ms));
-
-            // Helper to play a single text sequence smoothly
-            const playSeq = async (id) => {
+            
+            // Helper function to play a text sequence
+            const playText = async (id, durationMs, holdMs) => {
                 const el = document.getElementById(id);
-                if (el) {
+                if(el) {
                     el.classList.add('visible');
-                    await delay(4000); // 1.5s fade in + 2.5s reading time
-                    el.classList.remove('visible');
-                    await delay(1500); // Wait for the 1.5s fade out to complete
+                    await delay(holdMs); 
+                    
+                    // Don't fade out the very last element
+                    if(id !== 'seq-final') {
+                        el.classList.remove('visible');
+                        await delay(durationMs);
+                    }
                 }
             };
 
-            await delay(1000); // Initial dramatic pause after clicking
-
-            // Play the emotional sequence
-            await playSeq('seq-1');
-            await playSeq('seq-2');
-            await playSeq('seq-3');
-            await playSeq('seq-4');
-            await playSeq('seq-5');
-
-            // Grand Finale
-            finale.classList.add('show');
-            createParticles(50, '💖');
-            createParticles(50, '✨');
-            createParticles(30, '🌸');
+            await delay(1500); // Wait for screen to go completely black
+            
+            // Trigger Emotional Sequence
+            await playText('seq-1', 1200, 4000); // Anvi...
+            await playText('seq-2', 1200, 7500); // Blood didn't make us family...
+            await playText('seq-3', 1200, 6500); // I know we will grow older...
+            await playText('seq-4', 1200, 8000); // ...but my promise is eternal...
+            await playText('seq-5', 1500, 8500); // ...just remember you have a brother...
+            
+            // Finale Screen remains visible
+            document.getElementById('seq-final').classList.add('visible');
+            
+            // Ambient cinematic particles
+            const cx = window.innerWidth / 2;
+            const cy = window.innerHeight / 2;
+            setInterval(() => {
+                if(document.body.classList.contains('cinematic-active')){
+                    spawnParticles(4, '✨', cx + (Math.random()-0.5)*window.innerWidth, cy + (Math.random()-0.5)*window.innerHeight);
+                }
+            }, 600);
         }
 
         function resetApp() {
-            // Reset to initial state for replayability
+            // Remove cinematic mode
             document.body.classList.remove('cinematic-active');
-            document.getElementById('final-initial').style.display = 'block';
-            document.getElementById('grand-finale').classList.remove('show');
+            mainNav.style.transform = 'translateY(0)';
+            appFooter.style.opacity = '1';
+            
+            // Hide cinematic texts
+            document.querySelectorAll('.final-seq-text').forEach(el => el.classList.remove('visible'));
+            
+            // Go back to home
             navigateTo('home');
         }
 
-        /* --- MUSIC SYSTEM --- */
+        /* --- STREAMING_CHUNK:Audio Controller --- */
         const audio = document.getElementById('bg-music');
-        const musicBtn = document.getElementById('music-toggle');
-        
-        // Lower default volume
-        audio.volume = 0.4;
+        const musicToggle = document.getElementById('music-toggle');
+        audio.volume = 0.4; // Soft background volume
 
         function toggleMusic() {
-            if (isMusicPlaying) {
+            if(isMusicPlaying) {
                 audio.pause();
-                musicBtn.innerHTML = '🔇';
-                musicBtn.style.color = 'var(--text-main)';
+                musicToggle.innerText = '🔇';
+                musicToggle.classList.remove('text-brand-gold', 'border-brand-gold');
             } else {
-                audio.play().catch(e => console.log("Audio play failed:", e));
-                musicBtn.innerHTML = '🎵';
-                musicBtn.style.color = 'var(--accent-gold)';
-                // Optional pulse animation
-                musicBtn.style.animation = 'pulse 2s infinite';
+                audio.play().catch(e => console.log("Audio requires interaction first.", e));
+                musicToggle.innerText = '🎵';
+                musicToggle.classList.add('text-brand-gold', 'border-brand-gold');
             }
             isMusicPlaying = !isMusicPlaying;
         }
 
-        /* --- PARTICLE SYSTEM --- */
-        const particleContainer = document.getElementById('particles');
-        const defaultEmojis = ['✨', '💖', '🌸', '🪔'];
+        /* --- STREAMING_CHUNK:Advanced Particle System --- */
+        const particleContainer = document.getElementById('particles-js');
+        const defaultEmojis = ['✨', '💖', '🌸'];
 
-        function createParticles(amount, specificEmoji = null) {
+        function spawnParticles(amount, specificEmoji = null, x = null, y = null) {
             for (let i = 0; i < amount; i++) {
                 const particle = document.createElement('div');
                 particle.style.position = 'absolute';
                 
-                // Random position bottom
-                particle.style.left = Math.random() * 100 + 'vw';
-                particle.style.top = (Math.random() * 20 + 80) + 'vh'; // start near bottom
+                // Position logic - default to bottom of screen if no x/y provided
+                const startX = x !== null ? x : (Math.random() * window.innerWidth);
+                const startY = y !== null ? y : (window.innerHeight + 20);
                 
-                // Random content
+                particle.style.left = startX + 'px';
+                particle.style.top = startY + 'px';
                 particle.innerText = specificEmoji || defaultEmojis[Math.floor(Math.random() * defaultEmojis.length)];
                 
-                // Random styles
-                const size = Math.random() * 1.5 + 0.5;
+                // Randomize size
+                const size = (Math.random() * 1.5 + 0.8);
                 particle.style.fontSize = size + 'rem';
-                particle.style.opacity = '0';
-                particle.style.transform = `rotate(${Math.random() * 360}deg)`;
+                particle.style.pointerEvents = 'none';
+                particle.style.zIndex = Math.random() > 0.5 ? '50' : '0'; // Mix layering
                 
                 particleContainer.appendChild(particle);
 
-                // Animate via Web Animations API for better performance
-                const duration = Math.random() * 3000 + 2000;
-                const tx = (Math.random() - 0.5) * 200;
-                const ty = -(Math.random() * 500 + 300);
+                // Animation physics parameters
+                const duration = Math.random() * 2500 + 1500; // 1.5s to 4s
+                const tx = (Math.random() - 0.5) * 400; // Spread wide
+                const ty = -(Math.random() * 600 + 300); // Float high up
+                const rot = Math.random() * 720 - 360; // Spin
                 
+                // Use Web Animations API
                 const animation = particle.animate([
-                    { opacity: 0, transform: `translate(0, 0) rotate(0deg) scale(0.5)` },
-                    { opacity: 1, offset: 0.2 },
-                    { opacity: 0, transform: `translate(${tx}px, ${ty}px) rotate(${Math.random() * 720}deg) scale(1.5)` }
+                    { opacity: 0, transform: `translate(0, 0) scale(0.5) rotate(0deg)` },
+                    { opacity: 1, offset: 0.1 },
+                    { opacity: 1, offset: 0.8 },
+                    { opacity: 0, transform: `translate(${tx}px, ${ty}px) scale(${size * 1.5}) rotate(${rot}deg)` }
                 ], {
                     duration: duration,
-                    easing: 'cubic-bezier(0.25, 1, 0.5, 1)'
+                    easing: 'cubic-bezier(0.25, 1, 0.5, 1)' // Decelerate smoothly
                 });
 
+                // Cleanup DOM
                 animation.onfinish = () => particle.remove();
             }
         }
 
-        // Ambient background particles loop
+        // Ambient floating background particles
         setInterval(() => {
-            if(!document.body.classList.contains('cinematic-active')) {
-                // Very subtle background particles
-                createParticles(2);
+            if(!document.body.classList.contains('cinematic-active') && document.visibilityState === 'visible') {
+                spawnParticles(2, null, Math.random() * window.innerWidth, window.innerHeight + 10);
             }
-        }, 1500);
+        }, 1200);
 
-        let cinematicInterval;
-        function startCinematicParticles() {
-            clearInterval(cinematicInterval);
-            cinematicInterval = setInterval(() => {
-                if(document.body.classList.contains('cinematic-active')) {
-                    createParticles(5, '✨');
-                } else {
-                    clearInterval(cinematicInterval);
-                }
-            }, 800);
-        }
-
-        /* Initialize */
+        // Initialization on Load
         window.onload = () => {
-            // Ensure first page is active
             navigateTo('home');
         };
     </script>
